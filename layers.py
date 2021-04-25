@@ -165,7 +165,7 @@ class MaxPooling(Layer):
                         kernal = X[n][c][h_start:h_end, w_start:w_end]
                         max_v = np.max(kernal)  # max value of current kernal
                         X_o[n][c][h][w] = max_v  # set max_val to output
-                        max_i = np.argmax(kernal, axis=-1)  # find max_v indx
+                        max_i = np.unravel_index(np.argmax(kernal, axis=None), kernal.shape)  # find max_v indx
                         dx_indexes.append([h_start + max_i[0], w_start + max_i[1]])
 
         self.dx_indexes = dx_indexes
